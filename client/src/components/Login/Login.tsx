@@ -20,7 +20,7 @@ const Login:React.FC= () => {
           body: JSON.stringify({ username, password }),
         });
         if (res.ok) {
-          navigate('studentprofile');
+          navigate('/studentprofile');
         } else {
           const errorData = await res.json();
           alert(errorData.error || 'Login failed');
