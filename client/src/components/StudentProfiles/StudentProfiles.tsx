@@ -40,7 +40,7 @@ const StudentProfiles:React.FC = () => {
 
 
       const fetchStudents = async () => {
-        const res = await fetch("http://localhost:8000/api/students/");
+        const res = await fetch("https://pythonstudentdatabaseserver.onrender.com/api/students/");
         const data = await res.json();
         setStudents(data);
       };
@@ -62,7 +62,7 @@ const StudentProfiles:React.FC = () => {
 
 
       const userAdd = async () => {
-                const res = await fetch("http://localhost:8000/api/students/", {
+                const res = await fetch("https://pythonstudentdatabaseserver.onrender.com/api/students/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(form),
@@ -84,7 +84,7 @@ const StudentProfiles:React.FC = () => {
         if (!updated) return;
       
         const updatedStudent = { ...student, first_name: updated };
-        const res = await fetch('/api/students/', {
+        const res = await fetch('https://pythonstudentdatabaseserver.onrender.com/api/students/', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(updatedStudent),
@@ -106,7 +106,7 @@ const StudentProfiles:React.FC = () => {
       const userDelete = async (id: string | undefined) => {
         if (!id) return;
       
-        const res = await fetch(`/api/students/${id}`, {
+        const res = await fetch(`https://pythonstudentdatabaseserver.onrender.com/api/students/${id}`, {
           method: 'DELETE',
         });
       

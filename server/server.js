@@ -8,7 +8,11 @@ import { fileURLToPath } from 'url';
 
 import connectDB from './config/db.js';
 import studentRoutes from './routes/studentRoutes.js';
+import loginRoute from './routes/loginRoute.js';
 import socketHandler from './socket/socket.js';
+
+
+
 
 dotenv.config();
 
@@ -17,18 +21,30 @@ const server = http.createServer(app);
 
 const io = new SocketIO(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://pythonstudentdatabaseclient.onrender.com',
   },
 });
+
+
+
 
 connectDB();
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => { req.io = io; next(); });
 
+
+app.use('/', loginRoute);
 app.use('/api/students', studentRoutes);
 
-app.get('/', (req, res) => res.send('Server is live ✅'));
+
+
+
+
+app.get('/', (req, res) => res.send('Server is live '));
+
+
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,7 +58,12 @@ app.all('/*splat', (req, res) => {
   });
 });
 
+
+
 io.on('connection', socket => socketHandler(socket, io));
 
+
+
+
 const PORT = process.env.PORT || 8000;
-server.listen(PORT, () => console.log(`🚀 Server  on port ${PORT}`));
+server.listen(PORT, () => console.log(` Server  on port ${PORT}`));
